@@ -1,14 +1,14 @@
-import SingleBook from "./SingleBook"
+import { Row } from "react-bootstrap";
+import SingleBook from "./SingleBook";
 
+const BookList = ({ books }) => {
+  return (
+    <Row xs={12} md={8} lg={4} className="d-flex g-3 mx-3">
+      {books.map((book) => {
+        return <SingleBook book={book} key={book.asin} />;
+      })}
+    </Row>
+  );
+};
 
-const BookList = ({books})=>{
-    return (
-        <div>
-            {books.map((book) =>{
-                return <SingleBook book={book} key={book.asin}/>
-            })}
-        </div>
-    )
-}
-
-export default BookList
+export default BookList;
