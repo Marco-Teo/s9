@@ -9,7 +9,6 @@ import {
   Button,
 } from "react-bootstrap";
 import { Component } from "react";
-import CommentArea from "./CommentArea ";
 
 class SingleBook extends Component {
   state = {
@@ -36,9 +35,6 @@ class SingleBook extends Component {
                   <CardText>category:{this.props.book.category}</CardText>
                   <CardText>price: {this.props.book.price}$</CardText>
                   <Button variant="primary">BUY</Button>
-                  {this.state.selected && (
-                    <CommentArea asin={this.props.book.asin} />
-                  )}
                 </CardBody>
               </Card>
             </Col>

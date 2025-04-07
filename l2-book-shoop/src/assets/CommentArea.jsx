@@ -1,17 +1,11 @@
 import { Component } from "react";
-
-const URL = `https://striveschool-api.herokuapp.com/api/comments/${asin}`;
-
+const URL = `https://striveschool-api.herokuapp.com/api/comments/`;
 class CommentArea extends Component {
-  state = {
-    reviews: [],
-  };
-
   getReviews = () => {
-    fetch(URL, {
+    fetch(URL + this.props.asin, {
       headers: {
         authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkMjgwZDM4MzRiZjAwMTUwMDA3MDEiLCJpYXQiOjE3NDM2ODY0NTIsImV4cCI6MTc0NDg5NjA1Mn0.P_eAH8S250yW9myek1XEuHxLLX7cyfy5LYKtGq4XVwQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2YzY2Q2NjVjZmRmODAwMTUwY2U1MzkiLCJpYXQiOjE3NDQwMzEwNzgsImV4cCI6MTc0NTI0MDY3OH0.idZ-RlCs9oDx-mZMSJaD2WfZ2-1OoVrrhWsTl3BMRR8",
       },
     })
       .then((response) => {
@@ -23,9 +17,7 @@ class CommentArea extends Component {
       })
       .then((data) => {
         console.log("recenzioni", data);
-        this.setState({
-          reviews: data,
-        });
+        this.props.changeState({ data });
       })
       .catch(() => {
         console.log("Errore nella ricezione dei dati");
@@ -34,17 +26,12 @@ class CommentArea extends Component {
 
   componentDidMount = () => {
     this.getReviews();
-    console.log("pippo");
   };
 
   render() {
     return (
       <div className="my-3">
-        <p>
-          {this.state?.reviews?.map((book) => {
-            return <div>{book.comment}</div>;
-          })}
-        </p>
+        <div>{JSON.stringify(this.props.readComments)}</div>
       </div>
     );
   }
